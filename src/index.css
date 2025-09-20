@@ -1,0 +1,263 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Vibrant blue theme with diamond aesthetics */
+    --background: 240 5% 5%; /* Deep dark blue */
+    --foreground: 220 2% 98%; /* Bright white */
+    --card: 240 8% 8%; /* Dark blue cards */
+    --card-foreground: 220 2% 98%;
+    --popover: 240 8% 8%;
+    --popover-foreground: 220 2% 98%;
+    --primary: 220 80% 60%; /* Bright vibrant blue */
+    --primary-foreground: 240 5% 5%;
+    --secondary: 240 15% 15%; /* Deep navy */
+    --secondary-foreground: 220 2% 98%;
+    --muted: 240 8% 12%; /* Muted dark blue */
+    --muted-foreground: 220 5% 75%;
+    --accent: 200 80% 70%; /* Bright cyan accent */
+    --accent-foreground: 240 5% 5%;
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 220 2% 98%;
+    --border: 240 15% 25%; /* More visible blue borders */
+    --input: 240 8% 12%;
+    --ring: 220 80% 60%;
+    --chart-1: 220 80% 60%;
+    --chart-2: 200 80% 70%;
+    --chart-3: 160 70% 60%;
+    --chart-4: 40 80% 65%;
+    --chart-5: 320 70% 60%;
+    --radius: 0.75rem;
+    --sidebar: 240 8% 6%;
+    --sidebar-foreground: 220 2% 98%;
+    --sidebar-primary: 240 8% 12%;
+    --sidebar-primary-foreground: 220 2% 98%;
+    --sidebar-accent: 220 80% 60%;
+    --sidebar-accent-foreground: 240 5% 5%;
+    --sidebar-border: 240 15% 25%;
+    --sidebar-ring: 220 80% 60%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    /* Enhanced animated diamond background */
+    background-image: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(14, 165, 233, 0.2) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 60% 60%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/30 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary/50;
+  }
+}
+
+@layer utilities {
+  .glass-effect {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(220 80% 60%), hsl(200 80% 70%), hsl(160 70% 60%));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .modern-shadow {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.1);
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl;
+  }
+
+  /* Added diamond animation utilities */
+  .diamond-sparkle {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .diamond-sparkle::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(59, 130, 246, 0.1) 50%, transparent 70%);
+    animation: sparkle 3s infinite;
+    pointer-events: none;
+  }
+
+  @keyframes sparkle {
+    0% {
+      transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+  }
+
+  .floating-diamonds {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .diamond {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(45deg, #3b82f6, #06b6d4, #8b5cf6);
+    transform: rotate(45deg);
+    animation: float 6s infinite ease-in-out;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px) rotate(45deg);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(-20px) rotate(225deg);
+      opacity: 1;
+    }
+  }
+
+  .diamond:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+  }
+  .diamond:nth-child(2) {
+    left: 20%;
+    animation-delay: 1s;
+  }
+  .diamond:nth-child(3) {
+    left: 30%;
+    animation-delay: 2s;
+  }
+  .diamond:nth-child(4) {
+    left: 40%;
+    animation-delay: 3s;
+  }
+  .diamond:nth-child(5) {
+    left: 50%;
+    animation-delay: 4s;
+  }
+  .diamond:nth-child(6) {
+    left: 60%;
+    animation-delay: 5s;
+  }
+  .diamond:nth-child(7) {
+    left: 70%;
+    animation-delay: 0.5s;
+  }
+  .diamond:nth-child(8) {
+    left: 80%;
+    animation-delay: 1.5s;
+  }
+  .diamond:nth-child(9) {
+    left: 90%;
+    animation-delay: 2.5s;
+  }
+
+  /* Fade in animations */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Delay classes */
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .delay-400 {
+    animation-delay: 0.4s;
+  }
+
+  .delay-500 {
+    animation-delay: 0.5s;
+  }
+
+  .delay-600 {
+    animation-delay: 0.6s;
+  }
+
+  .delay-700 {
+    animation-delay: 0.7s;
+  }
+
+  .delay-800 {
+    animation-delay: 0.8s;
+  }
+
+  .delay-900 {
+    animation-delay: 0.9s;
+  }
+
+  .delay-1000 {
+    animation-delay: 1.0s;
+  }
+}

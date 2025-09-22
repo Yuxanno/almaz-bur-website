@@ -3,6 +3,10 @@ import mongoose from "mongoose"
 import dotenv from "dotenv"
 import cors from "cors"
 import TelegramBot from "node-telegram-bot-api"
+import dns from "dns"   // 🔹 добавляем dns
+
+// 🔹 заставляем Node использовать IPv4 (фикс ошибки ENOTFOUND)
+dns.setDefaultResultOrder("ipv4first")
 
 dotenv.config()
 

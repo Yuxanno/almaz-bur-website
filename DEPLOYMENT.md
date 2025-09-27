@@ -26,6 +26,8 @@ npm run preview
 
 1. Загрузите содержимое папки `dist` на ваш хостинг
 2. Убедитесь, что настроен редирект всех запросов на `index.html` (SPA routing)
+3. Настройте переменные окружения:
+   - `VITE_API_URL` - URL вашего бэкенда (например, https://ваш-бэкенд.com)
 
 ### Вариант 2: Node.js сервер
 
@@ -36,9 +38,10 @@ npm run preview
    ```
 3. Создайте файл `.env` с необходимыми переменными окружения:
    ```
+   VITE_API_URL=https://ваш-бэкенд.com
    MONGODB_URI=your_mongodb_connection_string
    TELEGRAM_BOT_TOKEN=your_telegram_bot_token
-   TELEGRAM_ADMIN_IDS=admin_id1,admin_id2
+   MAIN_ADMIN_IDS=admin_id1,admin_id2
    PORT=5000
    ```
 4. Запустите сервер:
@@ -78,9 +81,10 @@ npm run preview
        ports:
          - "5000:5000"
        environment:
+         - VITE_API_URL=https://ваш-бэкенд.com
          - MONGODB_URI=${MONGODB_URI}
          - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
-         - TELEGRAM_ADMIN_IDS=${TELEGRAM_ADMIN_IDS}
+         - MAIN_ADMIN_IDS=${MAIN_ADMIN_IDS}
          - PORT=5000
        env_file:
          - .env
@@ -96,11 +100,45 @@ npm run preview
 Создайте файл `.env` в корне проекта со следующими переменными:
 
 ```
+# Для фронтенда (Vite)
+VITE_API_URL=https://ваш-бэкенд.com
+
+# Для бэкенда
 MONGODB_URI=your_mongodb_connection_string
 TELEGRAM_BOT_TOKEN=your_telegram_bot_token
-TELEGRAM_ADMIN_IDS=admin_id1,admin_id2
+MAIN_ADMIN_IDS=admin_id1,admin_id2
 PORT=5000
 ```
+
+## Настройка для различных платформ
+
+### Netlify
+
+1. В настройках сайта перейдите к "Environment variables"
+2. Добавьте переменную:
+   - Key: `VITE_API_URL`
+   - Value: `https://ваш-бэкенд-домен.com`
+
+### Vercel
+
+1. В настройках проекта перейдите к "Environment Variables"
+2. Добавьте переменную:
+   - Key: `VITE_API_URL`
+   - Value: `https://ваш-бэкенд-домен.com`
+
+### GitHub Pages
+
+Для GitHub Pages переменные окружения нужно задавать во время сборки:
+
+1. Создайте файл `.env.production` в корне проекта
+2. Добавьте в него:
+   ```
+   VITE_API_URL=https://ваш-бэкенд-домен.com
+   ```
+3. Выполните сборку:
+   ```bash
+   npm run build
+   ```
 
 ## Требования к серверу
 

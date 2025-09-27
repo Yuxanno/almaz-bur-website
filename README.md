@@ -38,10 +38,13 @@ npm install
 Создайте файл `.env` в корне проекта со следующими переменными:
 
 ```
-MONGODB_URI=your_mongodb_connection_string
-TELEGRAM_BOT_TOKEN=your_telegram_bot_token
-MAIN_ADMIN_IDS=admin_id1,admin_id2
-PORT=5000
+VITE_API_URL=http://localhost:5000
+```
+
+Для production используйте:
+
+```
+VITE_API_URL=https://ваш-домен-бэкенда.com
 ```
 
 ### 3. Запуск в режиме разработки:
@@ -67,6 +70,26 @@ npm run production
 ```bash
 docker-compose up -d
 ```
+
+## Конфигурация для платформ деплоя
+
+### Netlify
+
+1. В настройках сайта перейдите к "Environment variables"
+2. Добавьте переменную:
+   - Key: `VITE_API_URL`
+   - Value: `https://ваш-бэкенд-домен.com`
+
+### Vercel
+
+1. В настройках проекта перейдите к "Environment Variables"
+2. Добавьте переменную:
+   - Key: `VITE_API_URL`
+   - Value: `https://ваш-бэкенд-домен.com`
+
+### Другие платформы
+
+Для других платформ убедитесь, что переменная окружения `VITE_API_URL` установлена в значение URL вашего бэкенда.
 
 ## Структура проекта
 

@@ -1,11 +1,20 @@
-import { useState } from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card"
-import { Button } from "../ui/Button"
-import { Input } from "../ui/Input"
-import { Textarea } from "../ui/Textarea"
-import { Label } from "../ui/Label"
-import { Modal } from "../ui/Modal"
-import { Clock, Gem, Sparkles, Loader2, CheckCircle, AlertCircle, ArrowRight } from "lucide-react"
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card";
+import { Button } from "../ui/Button";
+import { Input } from "../ui/Input";
+import { Textarea } from "../ui/Textarea";
+import { Label } from "../ui/Label";
+import { Modal } from "../ui/Modal";
+import {
+  Clock,
+  Gem,
+  Sparkles,
+  Loader2,
+  CheckCircle,
+  AlertCircle,
+  ArrowRight,
+} from "lucide-react";
+import { apiCall } from "@/utils/api";
 
 export function OrderSection() {
   const [formData, setFormData] = useState({
@@ -14,106 +23,120 @@ export function OrderSection() {
     address: "",
     service: "",
     description: "",
-  })
+  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState(null)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalType, setModalType] = useState('success')
-  const [modalTitle, setModalTitle] = useState('')
-  const [modalMessage, setModalMessage] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalType, setModalType] = useState("success");
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalMessage, setModalMessage] = useState("");
 
   // Функция форматирования номера телефона
   const formatPhoneNumber = (value) => {
     // Удаляем все символы кроме цифр
-    const numbers = value.replace(/\D/g, '')
-    
+    const numbers = value.replace(/\D/g, "");
+
     // Если номер начинается с 998, убираем его
-    let cleanNumber = numbers
-    if (numbers.startsWith('998')) {
-      cleanNumber = numbers.substring(3)
+    let cleanNumber = numbers;
+    if (numbers.startsWith("998")) {
+      cleanNumber = numbers.substring(3);
     }
-    
+
     // Ограничиваем до 9 цифр
-    cleanNumber = cleanNumber.substring(0, 9)
-    
+    cleanNumber = cleanNumber.substring(0, 9);
+
     // Форматируем как +998 (XX) XXX XX XX
     if (cleanNumber.length === 0) {
-      return '+998 ('
+      return "+998 (";
     } else if (cleanNumber.length <= 2) {
-      return `+998 (${cleanNumber}`
+      return `+998 (${cleanNumber}`;
     } else if (cleanNumber.length <= 5) {
-      return `+998 (${cleanNumber.substring(0, 2)}) ${cleanNumber.substring(2)}`
+      return `+998 (${cleanNumber.substring(0, 2)}) ${cleanNumber.substring(
+        2
+      )}`;
     } else if (cleanNumber.length <= 7) {
-      return `+998 (${cleanNumber.substring(0, 2)}) ${cleanNumber.substring(2, 5)} ${cleanNumber.substring(5)}`
+      return `+998 (${cleanNumber.substring(0, 2)}) ${cleanNumber.substring(
+        2,
+        5
+      )} ${cleanNumber.substring(5)}`;
     } else {
-      return `+998 (${cleanNumber.substring(0, 2)}) ${cleanNumber.substring(2, 5)} ${cleanNumber.substring(5, 7)} ${cleanNumber.substring(7)}`
+      return `+998 (${cleanNumber.substring(0, 2)}) ${cleanNumber.substring(
+        2,
+        5
+      )} ${cleanNumber.substring(5, 7)} ${cleanNumber.substring(7)}`;
     }
-  }
+  };
 
   const handlePhoneChange = (e) => {
-    const formatted = formatPhoneNumber(e.target.value)
-    setFormData(prev => ({
+    const formatted = formatPhoneNumber(e.target.value);
+    setFormData((prev) => ({
       ...prev,
-      phone: formatted
-    }))
-  }
+      phone: formatted,
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus(null)
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
 
     try {
-      const response = await fetch("http://localhost:5000/api/orders", {
+      const response = await apiCall("/api/orders", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(formData),
-      })
+      });
 
-      const result = await response.json()
+      const result = await response.json();
 
       if (result.success) {
-        setModalType('success')
-        setModalTitle('Buyurtma qabul qilindi! 🎉')
-        setModalMessage('Sizning buyurtmangiz muvaffaqiyatli yuborildi. Bizning menejer 15 daqiqa ichida siz bilan bog\'lanadi va barcha tafsilotlarni muhokama qiladi.')
-        setModalOpen(true)
+        setModalType("success");
+        setModalTitle("Buyurtma qabul qilindi! 🎉");
+        setModalMessage(
+          "Sizning buyurtmangiz muvaffaqiyatli yuborildi. Bizning menejer 15 daqiqa ichida siz bilan bog'lanadi va barcha tafsilotlarni muhokama qiladi."
+        );
+        setModalOpen(true);
         setFormData({
           name: "",
           phone: "",
           address: "",
           service: "",
           description: "",
-        })
+        });
       } else {
-        setModalType('error')
-        setModalTitle('Xatolik yuz berdi 😔')
-        setModalMessage('Buyurtma yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring yoki telefon orqali to\'g\'ridan-to\'g\'ri bog\'laning.')
-        setModalOpen(true)
-        console.error("Error submitting form:", result.message)
+        setModalType("error");
+        setModalTitle("Xatolik yuz berdi 😔");
+        setModalMessage(
+          "Buyurtma yuborishda xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring yoki telefon orqali to'g'ridan-to'g'ri bog'laning."
+        );
+        setModalOpen(true);
+        console.error("Error submitting form:", result.message);
       }
     } catch (error) {
-      setModalType('error')
-      setModalTitle('Internet aloqasi yo\'q 😞')
-      setModalMessage('Internet aloqasida muammo bor. Iltimos, internet aloqangizni tekshiring va qaytadan urinib ko\'ring.')
-      setModalOpen(true)
-      console.error("Network error:", error)
+      setModalType("error");
+      setModalTitle("Internet aloqasi yo'q 😞");
+      setModalMessage(
+        "Internet aloqasida muammo bor. Iltimos, internet aloqangizni tekshiring va qaytadan urinib ko'ring."
+      );
+      setModalOpen(true);
+      console.error("Network error:", error);
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   return (
-    <section id="order" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-muted/30 to-background diamond-sparkle relative overflow-hidden">
+    <section
+      id="order"
+      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-muted/30 to-background diamond-sparkle relative overflow-hidden"
+    >
       {/* Background effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-xl animate-pulse" />
@@ -132,7 +155,8 @@ export function OrderSection() {
             <span className="text-primary font-bold">Buyurtma</span> yuborish
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed px-4 animate-fade-in-up delay-200">
-            Formani to'ldiring, biz tafsilotlarni aniqlash uchun siz bilan bog'lanamiz
+            Formani to'ldiring, biz tafsilotlarni aniqlash uchun siz bilan
+            bog'lanamiz
           </p>
         </div>
 
@@ -151,14 +175,20 @@ export function OrderSection() {
                 Buyurtma yuborish
               </CardTitle>
               <p className="text-muted-foreground text-base sm:text-lg">
-                Formani to'ldiring, biz tafsilotlarni aniqlash uchun siz bilan bog'lanamiz
+                Formani to'ldiring, biz tafsilotlarni aniqlash uchun siz bilan
+                bog'lanamiz
               </p>
             </CardHeader>
             <CardContent className="pt-0 p-6 sm:p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2 animate-fade-in-up delay-400">
-                    <Label htmlFor="name" className="text-sm font-medium text-foreground">Ism *</Label>
+                    <Label
+                      htmlFor="name"
+                      className="text-sm font-medium text-foreground"
+                    >
+                      Ism *
+                    </Label>
                     <Input
                       id="name"
                       name="name"
@@ -172,7 +202,12 @@ export function OrderSection() {
                   </div>
 
                   <div className="space-y-2 animate-fade-in-up delay-500">
-                    <Label htmlFor="phone" className="text-sm font-medium text-foreground">Telefon raqami *</Label>
+                    <Label
+                      htmlFor="phone"
+                      className="text-sm font-medium text-foreground"
+                    >
+                      Telefon raqami *
+                    </Label>
                     <Input
                       id="phone"
                       name="phone"
@@ -187,7 +222,12 @@ export function OrderSection() {
                 </div>
 
                 <div className="space-y-2 animate-fade-in-up delay-600">
-                  <Label htmlFor="address" className="text-sm font-medium text-foreground">Obyekt manzili</Label>
+                  <Label
+                    htmlFor="address"
+                    className="text-sm font-medium text-foreground"
+                  >
+                    Obyekt manzili
+                  </Label>
                   <Input
                     id="address"
                     name="address"
@@ -200,7 +240,12 @@ export function OrderSection() {
                 </div>
 
                 <div className="space-y-2 animate-fade-in-up delay-700">
-                  <Label htmlFor="service" className="text-sm font-medium text-foreground">Xizmat turi *</Label>
+                  <Label
+                    htmlFor="service"
+                    className="text-sm font-medium text-foreground"
+                  >
+                    Xizmat turi *
+                  </Label>
                   <select
                     id="service"
                     name="service"
@@ -218,7 +263,12 @@ export function OrderSection() {
                 </div>
 
                 <div className="space-y-2 animate-fade-in-up delay-800">
-                  <Label htmlFor="description" className="text-sm font-medium text-foreground">Buyurtma tafsilotlari</Label>
+                  <Label
+                    htmlFor="description"
+                    className="text-sm font-medium text-foreground"
+                  >
+                    Buyurtma tafsilotlari
+                  </Label>
                   <Textarea
                     id="description"
                     name="description"
@@ -230,9 +280,9 @@ export function OrderSection() {
                   />
                 </div>
 
-                <Button 
-                  type="submit" 
-                  disabled={isSubmitting} 
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
                   className="w-full h-14 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground text-lg font-semibold rounded-xl modern-shadow hover-lift group transition-all duration-300 animate-fade-in-up delay-900"
                 >
                   {isSubmitting ? (
@@ -252,7 +302,9 @@ export function OrderSection() {
                 {!submitStatus && (
                   <div className="flex items-center justify-center gap-3 text-muted-foreground bg-muted/50 border border-primary/20 rounded-xl p-4 animate-fade-in-up delay-1000">
                     <Clock className="w-5 h-5 text-primary" />
-                    <span className="font-medium">Menejer 15 daqiqa ichida siz bilan bog'lanadi</span>
+                    <span className="font-medium">
+                      Menejer 15 daqiqa ichida siz bilan bog'lanadi
+                    </span>
                   </div>
                 )}
               </form>
@@ -270,5 +322,5 @@ export function OrderSection() {
         message={modalMessage}
       />
     </section>
-  )
+  );
 }

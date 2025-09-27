@@ -1,95 +1,103 @@
-# Almaz Bur Website
+# Almaz Bur - Вебсайт для компании по алмазному бурению
 
-Professional olmosli burg'ulash va beton kesish xizmatlari uchun veb-sayt.
+Этот проект представляет собой современный веб-сайт для компании по алмазному бурению и резке бетона, созданный с использованием React, Vite, TailwindCSS и Node.js.
 
-## Texnologiyalar
+## Особенности
 
-- **React 18** - JavaScript kutubxonasi
-- **Vite** - Tez development server va build tool
-- **Tailwind CSS** - Utility-first CSS framework
-- **Radix UI** - Accessible UI komponentlar
-- **Lucide React** - Icon kutubxonasi
+### Фронтенд:
 
-## O'rnatish
+- Современный адаптивный дизайн
+- Анимации и переходы
+- Разделенные секции (Hero, О нас, Услуги, Контакты)
+- Форма заказа с валидацией
 
-1. Dependencelarni o'rnating:
+### Бэкенд:
+
+- REST API для обработки заказов
+- Интеграция с MongoDB для хранения данных
+- Интеграция с Telegram ботом для уведомлений администраторов
+- Возможность управления администраторами через Telegram
+
+## Стек технологий
+
+- **Фронтенд**: React 18, Vite, TailwindCSS, Lucide Icons
+- **Бэкенд**: Node.js, Express, MongoDB (Mongoose)
+- **Бот**: Telegram Bot API
+- **Сборка**: Vite
+
+## Установка и запуск
+
+### 1. Установка зависимостей:
+
 ```bash
 npm install
 ```
 
-2. Development serverni ishga tushiring:
+### 2. Переменные окружения:
+
+Создайте файл `.env` в корне проекта со следующими переменными:
+
+```
+MONGODB_URI=your_mongodb_connection_string
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token
+MAIN_ADMIN_IDS=admin_id1,admin_id2
+PORT=5000
+```
+
+### 3. Запуск в режиме разработки:
+
 ```bash
 npm run dev
 ```
 
-3. Brauzerda `http://localhost:3000` ni oching
+### 4. Создание production сборки:
 
-## Build qilish
-
-Production uchun build qilish:
 ```bash
 npm run build
 ```
 
-Build fayllar `dist` papkasida yaratiladi.
+### 5. Запуск в production режиме (одной командой):
 
-## Scripts
+```bash
+npm run production
+```
 
-- `npm run dev` - Development server (port 3000)
-- `npm run build` - Production build
-- `npm run preview` - Build preview
-- `npm run start` - Build preview (alias)
+### 6. Запуск с помощью Docker (рекомендуется для сервера):
 
-## Struktura
+```bash
+docker-compose up -d
+```
+
+## Структура проекта
 
 ```
 src/
-├── components/          # React komponentlar
-│   ├── layout/         # Layout komponentlar
-│   │   ├── Header.jsx
-│   │   ├── Footer.jsx
-│   │   └── ThemeProvider.jsx
-│   ├── sections/       # Sahifa bo'limlari
-│   │   ├── HeroSection.jsx
-│   │   ├── AboutSection.jsx
-│   │   ├── ServicesSection.jsx
-│   │   └── ContactMapSection.jsx
-│   ├── forms/          # Form komponentlar
-│   │   └── OrderSection.jsx
-│   ├── ui/             # UI komponentlar
-│   │   ├── Button.jsx
-│   │   ├── Card.jsx
-│   │   ├── Input.jsx
-│   │   ├── Label.jsx
-│   │   └── Textarea.jsx
-│   └── index.js        # Barcha komponentlarni eksport qilish
-├── constants/          # Konstanta fayllar
-│   ├── navigation.js
-│   ├── services.js
-│   └── advantages.js
-├── utils/              # Utility funksiyalar
-│   └── utils.js
-├── App.jsx             # Asosiy App komponent
-├── main.jsx           # React entry point
-└── index.css          # Global CSS va Tailwind
+├── components/
+│   ├── forms/       # Формы (заказ и т.д.)
+│   ├── layout/      # Компоненты макета (шапка, подвал)
+│   ├── sections/    # Секции сайта (Hero, About, Services и т.д.)
+│   └── ui/          # Базовые UI компоненты
+├── constants/       # Константы (услуги, навигация)
+├── utils/           # Вспомогательные функции
+├── App.jsx          # Основной компонент приложения
+└── main.jsx         # Точка входа
 ```
 
-## Xususiyatlar
+## Деплой
 
-- ✅ Responsive dizayn
-- ✅ Dark theme
-- ✅ Animatsiyalar va effektlar
-- ✅ Form validation
-- ✅ Google Maps integratsiyasi
-- ✅ Modern UI/UX
-- ✅ SEO optimizatsiya
-- ✅ Yaxshi tashkil etilgan kod struktura
-- ✅ Modulli arxitektura
-- ✅ Vibrant va jozibali ranglar
+Подробные инструкции по деплою находятся в файле [DEPLOYMENT.md](DEPLOYMENT.md).
 
-## Browser Support
+## API Эндпоинты
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+- `POST /api/orders` - Создание нового заказа
+- `GET /health` - Проверка состояния сервера
+
+## Функционал Telegram бота
+
+1. Уведомления администраторов о новых заказах
+2. Управление заказами через интерфейс бота
+3. Возможность удаления заказов
+
+## Лицензия
+
+Этот проект является собственностью компании Almaz Bur и не подлежит свободному распространению.

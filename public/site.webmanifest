@@ -1,0 +1,21 @@
+{
+  "name": "Almaz Bur - Professional Olmosli Burg'ulash Xizmatlari",
+  "short_name": "Almaz Bur",
+  "description": "G'ijduvonda professional olmosli burg'ulash, beton kesish va qurilish xizmatlari",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/placeholder-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/placeholder-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

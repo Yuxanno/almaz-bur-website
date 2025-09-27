@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://almazbur.netlify.app/sitemap.xml
+
+Host: almazbur.netlify.app

@@ -5,13 +5,14 @@
 
 [dev]
   command = "npm run dev"
-  targetPort = 3000
+  targetPort = 5173
   port = 8888
   publish = "dist"
 
 # Environment variables for build
 [build.environment]
   NODE_VERSION = "18"
+  NPM_FLAGS = "--production=false"
 
 # Headers for security
 [[headers]]

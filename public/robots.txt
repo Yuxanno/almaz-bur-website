@@ -3,27 +3,41 @@ Disallow: /api/
 Disallow: /admin/
 Disallow: /private/
 Disallow: /dist/
+Disallow: /node_modules/
+Disallow: /.netlify/
+
+# Allow all important content
+Allow: /
+Allow: /public/
+Allow: /src/
 
 Sitemap: https://almazbur.netlify.app/sitemap.xml
 
 Host: almazbur.netlify.app
 
-# Additional crawling directives for better SEO
+# Optimized crawling directives for better SEO
 User-agent: Googlebot
 Crawl-delay: 1
-
-User-agent: Bingbot
-Crawl-delay: 2
-
-User-agent: Slurp
-Crawl-delay: 2
-
-# Allow all content for search engines
-User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
+Crawl-delay: 1
 Allow: /
 
 User-agent: Slurp
+Crawl-delay: 1
 Allow: /
+
+User-agent: YandexBot
+Crawl-delay: 1
+Allow: /
+
+# Block unwanted bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

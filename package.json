@@ -4,19 +4,15 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "client": "vite",
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "server": "node server.js",
-    "server:dev": "nodemon server.js",
-    "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
-    "production": "node production.js",
-    "deploy": "npm run build && npm run production",
-    "presitemap": "node scripts/generate-keyword-sitemap.js",
+    "server": "node server-local.js",
+    "server:dev": "nodemon server-local.js",
+    "start": "concurrently \"npm run server\" \"npm run dev\"",
+    "dev:full": "concurrently \"npm run server:dev\" \"npm run dev\"",
     "sitemap": "node scripts/generate-keyword-sitemap.js",
-    "postbuild": "node scripts/generate-keyword-sitemap.js",
-    "prepare-netlify": "node scripts/prepare-netlify.js"
+    "postbuild": "node scripts/generate-keyword-sitemap.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "1.2.2",
@@ -58,7 +54,6 @@
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
     "mongoose": "^8.18.1",
-    "node-fetch": "^3.3.2",
     "node-telegram-bot-api": "^0.66.0",
     "react": "^18.2.0",
     "react-day-picker": "9.8.0",
@@ -69,7 +64,6 @@
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
-    "telegraf": "^4.15.6",
     "vaul": "^0.9.9",
     "zod": "3.25.67"
   },

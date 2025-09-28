@@ -9,7 +9,7 @@ const baseUrl = "https://almazbur.netlify.app";
 
 // Define keyword-focused pages for better SEO
 const keywordPages = [
-  // Main keyword pages
+  // Main keyword pages - HIGHEST PRIORITY
   { path: "/", priority: "1.0", changefreq: "daily" },
   { path: "/#home", priority: "1.0", changefreq: "daily" },
   { path: "/#about", priority: "0.9", changefreq: "weekly" },
@@ -17,28 +17,42 @@ const keywordPages = [
   { path: "/#order", priority: "0.9", changefreq: "weekly" },
   { path: "/#contacts", priority: "0.8", changefreq: "monthly" },
 
-  // Keyword-specific pages for "almaz bur"
-  { path: "/#almaz-bur", priority: "0.9", changefreq: "weekly" },
-  { path: "/#almazbur", priority: "0.9", changefreq: "weekly" },
-  { path: "/#bur", priority: "0.8", changefreq: "weekly" },
-  { path: "/#almaz", priority: "0.8", changefreq: "weekly" },
+  // Primary brand keywords - HIGH PRIORITY
+  { path: "/#almaz-bur", priority: "0.9", changefreq: "daily" },
+  { path: "/#almazbur", priority: "0.9", changefreq: "daily" },
+  { path: "/#bur", priority: "0.8", changefreq: "daily" },
+  { path: "/#almaz", priority: "0.8", changefreq: "daily" },
 
-  // Keyword-specific pages for services
-  { path: "/#diamond-drilling", priority: "0.8", changefreq: "weekly" },
-  { path: "/#concrete-cutting", priority: "0.8", changefreq: "weekly" },
+  // Service keywords - HIGH PRIORITY
+  { path: "/#diamond-drilling", priority: "0.8", changefreq: "daily" },
+  { path: "/#concrete-cutting", priority: "0.8", changefreq: "daily" },
+  { path: "/#beton-kesish", priority: "0.8", changefreq: "daily" },
+  { path: "/#beton-teshish", priority: "0.8", changefreq: "daily" },
+  { path: "/#teshish", priority: "0.8", changefreq: "daily" },
+  { path: "/#burlash", priority: "0.8", changefreq: "daily" },
   { path: "/#utilities-drilling", priority: "0.7", changefreq: "weekly" },
   { path: "/#demolition", priority: "0.7", changefreq: "weekly" },
 
-  // Location-based keywords
-  { path: "/#tashkent", priority: "0.8", changefreq: "weekly" },
-  { path: "/#toshkent", priority: "0.8", changefreq: "weekly" },
+  // Location-based keywords - HIGH PRIORITY
+  { path: "/#tashkent", priority: "0.8", changefreq: "daily" },
+  { path: "/#toshkent", priority: "0.8", changefreq: "daily" },
+  { path: "/#gijduvon", priority: "0.9", changefreq: "daily" },
+  { path: "/#gijduvon-burgulash", priority: "0.9", changefreq: "daily" },
+  { path: "/#buxoro", priority: "0.8", changefreq: "weekly" },
 
-  // Service-specific keywords
+  // Service-specific keywords - MEDIUM PRIORITY
   { path: "/#concrete-drilling", priority: "0.7", changefreq: "weekly" },
   { path: "/#brick-drilling", priority: "0.7", changefreq: "weekly" },
   { path: "/#water-pipe-drilling", priority: "0.7", changefreq: "weekly" },
   { path: "/#electrical-drilling", priority: "0.7", changefreq: "weekly" },
   { path: "/#sewer-drilling", priority: "0.7", changefreq: "weekly" },
+
+  // Long-tail keywords for better ranking
+  { path: "/#professional-drilling", priority: "0.8", changefreq: "weekly" },
+  { path: "/#high-quality-drilling", priority: "0.8", changefreq: "weekly" },
+  { path: "/#fast-drilling", priority: "0.7", changefreq: "weekly" },
+  { path: "/#free-consultation", priority: "0.7", changefreq: "weekly" },
+  { path: "/#15-years-experience", priority: "0.7", changefreq: "weekly" },
 ];
 
 // Generate the sitemap XML

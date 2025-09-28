@@ -32,4 +32,6 @@ export default defineConfig({
       },
     },
   },
+  // Ensure proper base path for Netlify
+  base: "/",
 });

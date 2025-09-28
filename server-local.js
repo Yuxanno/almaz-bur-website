@@ -1,18 +1,12 @@
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import TelegramBot from "node-telegram-bot-api";
 import dns from "dns";
 
-// 🔹 заставляем Node использовать IPv4 (фикс ошибки ENOTFOUND)
+// Заставляем Node использовать IPv4
 dns.setDefaultResultOrder("ipv4first");
-
-// Настройка __dirname для ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -27,9 +21,6 @@ app.use(
   })
 );
 app.use(express.json());
-
-// Serve static files from the React app build directory
-app.use(express.static(path.join(__dirname, "dist")));
 
 // MongoDB connect
 mongoose
@@ -121,11 +112,6 @@ app.get("/health", (req, res) => {
     status: "OK",
     db: mongoose.connection.readyState === 1 ? "Connected" : "Disconnected",
   });
-});
-
-// Catch all handler: Send back React's index.html file for any non-API routes
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 // Run server

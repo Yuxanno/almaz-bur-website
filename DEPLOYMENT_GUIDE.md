@@ -69,7 +69,7 @@ npm run dev:full
 
    | Ключ | Значение | Описание |
    |------|----------|----------|
-   | `MONGODB_URI` | `mongodb+srv://username:password@cluster.mongodb.net/database_name` | Строка подключения к MongoDB |
+   | `MONGODB_URI` | `mongodb+srv://almazburgij_db_user:almazburgij_db_user@almazbase.ni6fyef.mongodb.net/` | Строка подключения к MongoDB |
    | `TELEGRAM_BOT_TOKEN` | `1234567890:ABCdefGHIjklMNOpqrsTUVwxyz` | Токен Telegram бота |
    | `MAIN_ADMIN_IDS` | `123456789,987654321` | ID администраторов (через запятую) |
 

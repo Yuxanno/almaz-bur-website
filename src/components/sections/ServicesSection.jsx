@@ -15,14 +15,17 @@ export function ServicesSection() {
             <span className="w-2 h-2 bg-primary rounded-full mr-2" />
             Professional xizmatlar
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-balance px-2 animate-fade-in-up delay-200">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-balance px-2 animate-fade-in-up delay-200">
             Bizning{" "}
-            <span className="text-primary font-bold">xizmatlarimiz</span>
+            <span className="text-primary font-bold">xizmatlarimiz</span> -
+            Almaz Bur
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed px-4 animate-fade-in-up delay-300">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed px-4 animate-fade-in-up delay-300">
             Zamonaviy uskunalar va ilg'or texnologiyalardan foydalangan holda
             olmosli burg'ulash va beton kesish bo'yicha to'liq xizmatlar
-            spektrini taqdim etamiz
+            spektrini taqdim etamiz. Almaz bur, beton teshish, g'isht teshish,
+            suv tashish teshiklari, elektr tashish teshiklari, kanalizatsiya
+            teshiklari.
           </p>
         </div>
 

@@ -13,9 +13,10 @@
     "dev": "concurrently \"npm run server:dev\" \"npm run client\"",
     "production": "node production.js",
     "deploy": "npm run build && npm run production",
-    "presitemap": "node scripts/generate-sitemap.js",
-    "sitemap": "node scripts/generate-sitemap.js",
-    "postbuild": "node scripts/generate-sitemap.js"
+    "presitemap": "node scripts/generate-keyword-sitemap.js",
+    "sitemap": "node scripts/generate-keyword-sitemap.js",
+    "postbuild": "node scripts/generate-keyword-sitemap.js",
+    "prepare-netlify": "node scripts/prepare-netlify.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "1.2.2",

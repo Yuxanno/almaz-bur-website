@@ -1,0 +1,16 @@
+{
+  "name": "almaz-bur-functions",
+  "version": "1.0.0",
+  "description": "Netlify functions for Almaz Bur website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mongoose": "^8.18.1",
+    "node-telegram-bot-api": "^0.66.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

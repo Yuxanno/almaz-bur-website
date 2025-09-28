@@ -151,10 +151,10 @@ export function OrderSection() {
             <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse" />
             Professional xizmatlar
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 text-balance px-2 animate-fade-in-up">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-balance px-2 animate-fade-in-up">
             <span className="text-primary font-bold">Buyurtma</span> yuborish
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed px-4 animate-fade-in-up delay-200">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed px-4 animate-fade-in-up delay-200">
             Formani to'ldiring, biz tafsilotlarni aniqlash uchun siz bilan
             bog'lanamiz
           </p>
@@ -171,10 +171,10 @@ export function OrderSection() {
                   <Sparkles className="w-6 h-6 text-accent absolute -top-1 -right-1 animate-pulse" />
                 </div>
               </div>
-              <CardTitle className="text-2xl sm:text-3xl font-bold mb-4 group-hover:text-primary transition-colors">
+              <CardTitle className="text-xl sm:text-2xl font-bold mb-4 group-hover:text-primary transition-colors">
                 Buyurtma yuborish
               </CardTitle>
-              <p className="text-muted-foreground text-base sm:text-lg">
+              <p className="text-muted-foreground text-base">
                 Formani to'ldiring, biz tafsilotlarni aniqlash uchun siz bilan
                 bog'lanamiz
               </p>

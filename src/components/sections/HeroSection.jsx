@@ -34,20 +34,21 @@ export function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Левая половина - текстовая информация */}
           <div className="text-left flex flex-col justify-center">
-            <div className="inline-flex items-center px-4 py-2 rounded-full glass-effect text-sm font-medium text-primary mb-6 animate-fade-in border border-primary/20">
+            <div className="flex items-center px-4 py-2 rounded-full glass-effect text-sm font-medium text-primary mb-6 animate-fade-in border border-primary/20">
               <span className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse" />
               2010 yildan beri professional xizmatlar
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-balance leading-tight animate-fade-in-up delay-200">
-              Olmosli burg'ulash va{" "}
-              <span className="text-primary font-bold">beton kesish</span> har
-              qanday murakkablikda
+            <h1 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 text-balance leading-tight animate-fade-in-up delay-200">
+              <span className="text-primary font-bold">Almaz Bur</span> -
+              Professional Olmosli burg'ulash va beton kesish xizmatlari
             </h1>
 
-            <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 sm:mb-12 text-pretty leading-relaxed animate-fade-in-up delay-300">
-              Qurilishda eng murakkab vazifalarni hal qilish uchun zamonaviy
-              texnologiyalar va professional yondashuv
+            <p className="text-lg sm:text-xl md:text-xl text-muted-foreground mb-8 sm:mb-12 text-pretty leading-relaxed animate-fade-in-up delay-300">
+              G'ijduvonda eng murakkab qurilish vazifalarini hal qilish uchun
+              zamonaviy texnologiyalar va 15+ yillik professional tajriba. Almaz
+              bur, beton teshish, g'isht teshish, suv tashish teshiklari, elektr
+              tashish teshiklari, kanalizatsiya teshiklari.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 items-start animate-fade-in-up delay-500">
@@ -113,7 +114,7 @@ export function HeroSection() {
                 muted
                 loop
                 className="w-full h-full object-cover rounded-2xl"
-                poster="/placeholder.jpg"
+                poster="/logo.jpg"
               >
                 <source src="/7228386197-235311668-1.mp4" type="video/mp4" />
                 Sizning brauzeringiz ushbu videoni qo'llab-quvvatlamaydi.

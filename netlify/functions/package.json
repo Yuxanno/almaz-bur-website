@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "Netlify functions for Almaz Bur website",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "type": "commonjs",
   "dependencies": {
-    "mongoose": "^8.18.1",
-    "node-telegram-bot-api": "^0.66.0"
+    "mongoose": "^7.6.0",
+    "node-telegram-bot-api": "^0.61.0"
   },
-  "keywords": [],
+  "engines": {
+    "node": ">=18.x"
+  },
   "author": "",
   "license": "ISC"
 }

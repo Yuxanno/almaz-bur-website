@@ -7,12 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "server": "node server-local.js",
-    "server:dev": "nodemon server-local.js",
-    "start": "concurrently \"npm run server\" \"npm run dev\"",
-    "dev:full": "concurrently \"npm run server:dev\" \"npm run dev\"",
     "sitemap": "node scripts/generate-keyword-sitemap.js",
-    "postbuild": "node scripts/generate-keyword-sitemap.js"
+    "postbuild": "node scripts/generate-keyword-sitemap.js",
+    "setup:telegram": "node scripts/setup-telegram-webhook.js",
+    "test:telegram": "node scripts/test-telegram.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "1.2.2",
@@ -54,6 +52,7 @@
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
     "mongoose": "^8.18.1",
+    "node-fetch": "^3.3.2",
     "node-telegram-bot-api": "^0.66.0",
     "react": "^18.2.0",
     "react-day-picker": "9.8.0",

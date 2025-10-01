@@ -1,7 +1,6 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
   functions = "netlify/functions"
+  publish = "dist"
 
 [dev]
   command = "npm run dev"
@@ -24,13 +23,8 @@
 
 # Redirects for API endpoints
 [[redirects]]
-  from = "/api/orders"
-  to = "/.netlify/functions/orders"
-  status = 200
-
-[[redirects]]
-  from = "/health"
-  to = "/.netlify/functions/orders"
+  from = "/telegram/webhook"
+  to = "/.netlify/functions/telegram-webhook"
   status = 200
 
 # SPA fallback - must be last

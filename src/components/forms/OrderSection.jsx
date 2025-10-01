@@ -82,7 +82,7 @@ export function OrderSection() {
     setSubmitStatus(null);
 
     try {
-      const response = await apiCall("/api/orders", {
+      const response = await apiCall("/.netlify/functions/orders", {
         method: "POST",
         body: JSON.stringify(formData),
       });

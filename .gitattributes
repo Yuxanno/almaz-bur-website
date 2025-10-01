@@ -1,0 +1,17 @@
+# Автоматическая обработка окончаний строк
+* text=auto
+
+# Явное указание текстовых файлов
+*.txt text
+*.xml text
+*.html text
+*.css text
+*.js text
+*.json text
+*.md text
+
+# Бинарные файлы
+*.jpg binary
+*.png binary
+*.gif binary
+*.mp4 binary

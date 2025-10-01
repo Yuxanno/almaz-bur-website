@@ -2,18 +2,25 @@
 const mongoose = require("mongoose");
 const TelegramBot = require("node-telegram-bot-api");
 
-// MongoDB connection
-const connectToDatabase = async () => {
-  if (mongoose.connection.readyState === 1) {
-    return;
+// MongoDB connection with caching
+let cachedDb = null;
+
+const connectDB = async () => {
+  // Return cached connection if available
+  if (cachedDb && mongoose.connection.readyState === 1) {
+    return cachedDb;
   }
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("Connected to MongoDB");
+    console.log("Connecting to MongoDB...");
+
+    if (mongoose.connection.readyState !== 1) {
+      await mongoose.connect(process.env.MONGODB_URI);
+    }
+
+    cachedDb = mongoose.connection;
+    console.log("MongoDB connected successfully");
+    return cachedDb;
   } catch (error) {
     console.error("MongoDB connection error:", error);
     throw error;
@@ -30,16 +37,8 @@ const orderSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
+// Use existing model or create new one
 const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
-
-// Telegram bot initialization
-let bot;
-const initBot = () => {
-  if (!bot) {
-    bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: false });
-  }
-  return bot;
-};
 
 exports.handler = async (event, context) => {
   // Enable CORS
@@ -60,10 +59,7 @@ exports.handler = async (event, context) => {
 
   try {
     // Connect to database
-    await connectToDatabase();
-
-    // Initialize bot
-    const bot = initBot();
+    await connectDB();
 
     if (event.httpMethod === "POST") {
       // Parse request body
@@ -91,31 +87,53 @@ exports.handler = async (event, context) => {
         service,
         description,
       });
-      await newOrder.save();
+      const savedOrder = await newOrder.save();
 
-      // Send notification to Telegram
-      if (process.env.MAIN_ADMIN_IDS) {
+      // Send notification to Telegram admins
+      if (process.env.TELEGRAM_BOT_TOKEN && process.env.MAIN_ADMIN_IDS) {
         const admins = process.env.MAIN_ADMIN_IDS.split(",");
-        const messageText = `📩 Yangi buyurtma:\n👤 Ism: ${name}\n📞 Telefon: ${phone}\n📍 Manzil: ${
-          address || "-"
-        }\n🛠 Xizmat: ${service}\n📝 Tavsif: ${description || "-"}`;
+        const messageText = `📝 Yangi buyurtma:
+
+Ism: ${name}
+Telefon: ${phone}
+Manzil: ${address || "Ko'rsatilmagan"}
+Xizmat: ${service}
+Tavsif: ${description || "Ko'rsatilmagan"}
+Yaratilgan vaqt: ${new Date().toLocaleString("uz-UZ")}`;
+
+        // Initialize bot for sending message
+        const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, {
+          polling: false,
+        });
 
         for (const adminId of admins) {
           try {
-            await bot.sendMessage(adminId.trim(), messageText, {
-              reply_markup: {
-                inline_keyboard: [
-                  [
-                    {
-                      text: "❌ O'chirish",
-                      callback_data: `delete_${newOrder._id}`,
-                    },
+            const sentMessage = await bot.sendMessage(
+              adminId.trim(),
+              messageText,
+              {
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      {
+                        text: "❌ O'chirish",
+                        callback_data: `delete_order_${savedOrder._id}`,
+                      },
+                    ],
                   ],
-                ],
-              },
-            });
+                },
+              }
+            );
+            console.log(
+              `Successfully sent order notification to admin ${adminId.trim()}`
+            );
+            console.log(`Callback data sent: delete_order_${savedOrder._id}`);
+            console.log(
+              `Sent message details:`,
+              JSON.stringify(sentMessage, null, 2)
+            );
           } catch (error) {
-            console.error("Error sending Telegram message:", error);
+            console.error(`Failed to send message to admin ${adminId}:`, error);
           }
         }
       }
@@ -125,7 +143,8 @@ exports.handler = async (event, context) => {
         headers,
         body: JSON.stringify({
           success: true,
-          message: "Buyurtma saqlandi va Telegramga yuborildi",
+          message: "Buyurtma saqlandi",
+          orderId: savedOrder._id,
         }),
       };
     } else if (event.httpMethod === "GET") {

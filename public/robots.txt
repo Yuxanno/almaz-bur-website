@@ -1,15 +1,5 @@
 User-agent: *
-Disallow: /api/
-Disallow: /admin/
-Disallow: /private/
-Disallow: /dist/
-Disallow: /node_modules/
-Disallow: /.netlify/
-
-# Allow all important content
 Allow: /
-Allow: /public/
-Allow: /src/
 
 Sitemap: https://almazbur.netlify.app/sitemap.xml
 
